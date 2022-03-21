@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.views import View
 
-from blog_app.models import Blog
+from blog_app.forms import AddPostForm
+from blog_app.models import Blog, Post
 
 
 class IndexView(View):
@@ -29,7 +30,30 @@ class AddBlog(View):
         Blog.objects.create(name=name, topic=topic)
         return redirect('add_blog')
 
+
+class AddPostView(View):
+
+    def get(self, request):
+        form = AddPostForm()
+        return render(request, 'form.html', {'form': form})
+
+    def post(self, request):
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            blog = form.cleaned_data['blog']
+            Post.objects.create(text=text, blog=blog)
+            return redirect('add_post')
+        return render(request, 'form.html', {'form': form})
+
+
+class ShowPost(View):
+
+    def get(self, request):
+        return render(request, 'list.html', {'object_list': Post.objects.all()})
+
+
 class ShowBlog(View):
 
     def get(self, request):
-        return render(request, 'blog_list.html', {'blogs':Blog.objects.all()})
+        return render(request, 'list.html', {'object_list': Blog.objects.all()})

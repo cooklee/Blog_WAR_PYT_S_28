@@ -24,4 +24,6 @@ urlpatterns = [
     path('drugi/', views.IndexView2.as_view(), name='index2'),
     path('add_blog/', views.AddBlog.as_view(), name='add_blog'),
     path('show_blogs/', views.ShowBlog.as_view(), name='show_blog'),
+    path('add_post/', views.AddPostView.as_view(), name='add_post'),
+    path('show_post/', views.ShowPost.as_view(), name='show_post'),
 ]
