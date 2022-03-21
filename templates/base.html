@@ -8,6 +8,17 @@
     <title>Document</title>
 </head>
 <body>
-Witaj Moj mały Blogu :)
+<p>Witaj Moj mały Blogu :)</p>
+<ul>
+    <li><a href="{% url 'index' %}">index</a> </li>
+    <li><a href="{% url 'index2' %}">Druga</a> </li>
+</ul>
+<p>
+{% block sikorka %}
+Strona główna
+{% endblock %}
+</p>
+
+<p>a to jest moja stopka</p>
 </body>
 </html>

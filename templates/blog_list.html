@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block sikorka %}
+    <ul>
+        {% for item in blogs %}
+            <li>{{ item.name }} {{ item.creation_date }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
