@@ -1,16 +1,18 @@
+from datetime import datetime
+
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import View
 
-from blog_app.forms import AddPostForm
+from blog_app.forms import AddPostForm, AddPostFromBlogForm
 from blog_app.models import Blog, Post
 
 
 class IndexView(View):
 
     def get(self, request):
-        return render(request, 'base.html')
+        return render(request, 'base.html', {'date':"DUPA"})
 
 
 class IndexView2(View):
@@ -62,5 +64,15 @@ class ShowBlog(View):
 class ShowDetailBlog(View):
 
     def get(self, request, id):
+        form = AddPostFromBlogForm()
         blog = Blog.objects.get(pk=id)
-        return render(request, "blog_detail.html", {'blog': blog})
+        return render(request, "blog_detail.html", {'blog': blog, 'form': form})
+
+    def post(self, request, id):
+        blog = Blog.objects.get(pk=id)
+        form = AddPostFromBlogForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            Post.objects.create(text=text, blog=blog)
+            return redirect(f'/blog/{blog.id}/')
+        return render(request, 'form.html', {'form': form})

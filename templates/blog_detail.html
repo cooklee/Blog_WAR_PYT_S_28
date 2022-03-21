@@ -3,6 +3,7 @@
     <div>
     tresc bloga {{ blog }}
 
+
     {% for post in blog.post_set.all %}
     <p>
     <div style="border: solid; border-width: 1px;">
@@ -12,6 +13,11 @@
     </p>
     {% endfor %}
     </div>
+     <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
 {% endblock %}
 
 

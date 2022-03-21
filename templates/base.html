@@ -1,28 +1,30 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <title>Document</title>
 </head>
 <body>
 <p>Witaj Moj mały Blogu :)</p>
-<ul>
-    <li><a href="{% url 'index' %}">index</a></li>
-    <li><a href="{% url 'index2' %}">Druga</a></li>
-    <li><a href="{% url 'add_blog' %}">Dodaj blog</a></li>
-    <li><a href="{% url 'show_blog' %}">Blogi</a></li>
-    <li><a href="{% url 'add_post' %}">Dodaj Post</a></li>
-    <li><a href="{% url 'show_post' %}">Posty</a></li>
-</ul>
+<div class="topnav">
+    <a href="{% url 'index' %}">index</a>
+    <a href="{% url 'index2' %}">Druga</a>
+    <a href="{% url 'add_blog' %}">Dodaj blog</a>
+    <a href="{% url 'show_blog' %}">Blogi</a>
+    <a href="{% url 'add_post' %}">Dodaj Post</a>
+    <a href="{% url 'show_post' %}">Posty</a>
+</div>
 <p>
     {% block sikorka %}
         Strona główna
     {% endblock %}
 </p>
 
-<p>a to jest moja stopka</p>
+<p><img src="{% static 'pobrane.jfif' %}"> {{ date }}</p>
 </body>
 </html>
