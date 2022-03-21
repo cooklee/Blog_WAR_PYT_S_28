@@ -10,15 +10,17 @@
 <body>
 <p>Witaj Moj mały Blogu :)</p>
 <ul>
-    <li><a href="{% url 'index' %}">index</a> </li>
-    <li><a href="{% url 'index2' %}">Druga</a> </li>
-    <li><a href="{% url 'add_post' %}">Dodaj Post</a> </li>
-    <li><a href="{% url 'show_post' %}">Posty</a> </li>
+    <li><a href="{% url 'index' %}">index</a></li>
+    <li><a href="{% url 'index2' %}">Druga</a></li>
+    <li><a href="{% url 'add_blog' %}">Dodaj blog</a></li>
+    <li><a href="{% url 'show_blog' %}">Blogi</a></li>
+    <li><a href="{% url 'add_post' %}">Dodaj Post</a></li>
+    <li><a href="{% url 'show_post' %}">Posty</a></li>
 </ul>
 <p>
-{% block sikorka %}
-Strona główna
-{% endblock %}
+    {% block sikorka %}
+        Strona główna
+    {% endblock %}
 </p>
 
 <p>a to jest moja stopka</p>

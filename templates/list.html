@@ -2,7 +2,7 @@
 {% block sikorka %}
     <ul>
         {% for item in object_list %}
-            <li>{{item}}</li>
+            <li><a href="/blog/{{ item.id }}/">{{item}}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

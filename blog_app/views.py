@@ -57,3 +57,10 @@ class ShowBlog(View):
 
     def get(self, request):
         return render(request, 'list.html', {'object_list': Blog.objects.all()})
+
+
+class ShowDetailBlog(View):
+
+    def get(self, request, id):
+        blog = Blog.objects.get(pk=id)
+        return render(request, "blog_detail.html", {'blog': blog})
