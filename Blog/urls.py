@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from blog_app import views
+from blog_app import views, generic_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +30,7 @@ urlpatterns = [
     path('post/<int:id>/', views.ShowDetailPost.as_view(), name='show_detail_post'),
     path('add_comment/', views.AddCommentView.as_view(), name='add_comment'),
     path('update_post/<int:id>/', views.UpdatePostView.as_view(), name='update_post'),
-    path('delete_post/<int:id>/', views.DeletePostView.as_view(), name='delete_post')
+    path('delete_post/<int:id>/', views.DeletePostView.as_view(), name='delete_post'),
+    path('create_post_generic_view/', generic_views.CreatePostView.as_view(), name='gen_post_create_view'),
+    path('dpv_gen/<int:pk>/', generic_views.DetailPostVIew.as_view(), name='det_post_view_gen')
 ]
