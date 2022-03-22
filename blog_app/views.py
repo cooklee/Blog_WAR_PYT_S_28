@@ -4,10 +4,10 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import View
+from django.views.generic import CreateView
 
 from blog_app.forms import AddPostForm, AddPostFromBlogForm
 from blog_app.models import Blog, Post
-
 
 class IndexView(View):
 

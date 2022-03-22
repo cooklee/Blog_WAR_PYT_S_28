@@ -1,6 +1,9 @@
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
+
+
 class Blog(models.Model):
     name = models.CharField(max_length=30)
     topic = models.CharField(max_length=30)
@@ -8,6 +11,9 @@ class Blog(models.Model):
     #post_set
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("show_detail_blog", args=(self.id, ))
 
 
 class Post(models.Model):
@@ -17,3 +23,6 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.text[:20]} {self.creation_date}"
+
+    def get_absolute_url(self):
+        return ""
