@@ -2,7 +2,11 @@
 {% block sikorka %}
     <ul>
         {% for item in object_list %}
-            <li><a href="{{ item.get_absolute_url }}">{{item}}</a></li>
+            <li>
+                <a href="{{ item.get_absolute_url }}">{{item}}</a>
+                <a href="{{ item.get_update_url }}"> <button>Edytuj</button></a>
+                <a href="{{ item.get_delete_url }}"> <button>kasuj</button></a>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

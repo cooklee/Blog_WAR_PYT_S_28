@@ -19,6 +19,7 @@ class Blog(models.Model):
 
 class Post(models.Model):
     text = models.TextField()
+    title = models.TextField(default="")
     creation_date = models.DateTimeField(auto_now_add=True)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
 
@@ -27,3 +28,15 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("show_detail_post", kwargs={'id': self.id})
+
+    def get_update_url(self):
+        return reverse('update_post', kwargs={'id': self.id})
+
+    def get_delete_url(self):
+        return reverse('delete_post', kwargs={'id': self.id})
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    text = models.TextField()
+    nick = models.CharField(max_length=20)

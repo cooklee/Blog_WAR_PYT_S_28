@@ -3,10 +3,11 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.urls import reverse
 from django.views import View
 from django.views.generic import CreateView
 
-from blog_app.forms import AddPostForm, AddPostFromBlogForm
+from blog_app.forms import AddPostForm, AddPostFromBlogForm, AddPostModelForm, AddCommentModelForm
 from blog_app.models import Blog, Post
 
 class IndexView(View):
@@ -64,16 +65,17 @@ class ShowBlog(View):
 class ShowDetailBlog(View):
 
     def get(self, request, id):
-        form = AddPostFromBlogForm()
+        form = AddPostModelForm()
         blog = Blog.objects.get(pk=id)
         return render(request, "blog_detail.html", {'blog': blog, 'form': form})
 
     def post(self, request, id):
         blog = Blog.objects.get(pk=id)
-        form = AddPostFromBlogForm(request.POST)
+        form = AddPostModelForm(request.POST)
         if form.is_valid():
-            text = form.cleaned_data['text']
-            Post.objects.create(text=text, blog=blog)
+            post = form.save(commit=False)
+            post.blog = blog
+            post.save()
             return redirect(f'/blog/{blog.id}/')
         return render(request, 'form.html', {'form': form})
 
@@ -82,3 +84,43 @@ class ShowDetailPost(View):
     def get(self, request, id):
         post = Post.objects.get(pk=id)
         return render(request, 'post_detail_view.html', {'post':post})
+
+class UpdatePostView(View):
+
+    def get(self, request, id):
+        post = Post.objects.get(pk=id)
+        form = AddPostModelForm(instance=post)
+        return render(request, 'form.html', {'form':form})
+
+    def post(self, request, id):
+        post = Post.objects.get(pk=id)
+        form = AddPostModelForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("update_post"), args=[id])
+        return render(request, 'form.html', {'form': form})
+
+class DeletePostView(View):
+
+    def get(self, request, id):
+        # post = Post.objects.get(pk=id)
+        return render(request, 'form.html', {})
+
+    def post(self, request, id):
+        post = Post.objects.get(pk=id)
+        post.delete()
+        return redirect('show_post')
+
+
+class AddCommentView(View):
+
+    def get(self, request):
+        form = AddCommentModelForm()
+        return render(request, 'form.html', {'form':form})
+
+    def post(self, request):
+        form = AddCommentModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        return render(request, 'form.html', {'form': form})

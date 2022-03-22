@@ -28,4 +28,7 @@ urlpatterns = [
     path('show_post/', views.ShowPost.as_view(), name='show_post'),
     path('blog/<int:id>/', views.ShowDetailBlog.as_view(), name='show_detail_blog'),
     path('post/<int:id>/', views.ShowDetailPost.as_view(), name='show_detail_post'),
+    path('add_comment/', views.AddCommentView.as_view(), name='add_comment'),
+    path('update_post/<int:id>/', views.UpdatePostView.as_view(), name='update_post'),
+    path('delete_post/<int:id>/', views.DeletePostView.as_view(), name='delete_post')
 ]
