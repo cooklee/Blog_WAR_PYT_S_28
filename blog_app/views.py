@@ -76,3 +76,9 @@ class ShowDetailBlog(View):
             Post.objects.create(text=text, blog=blog)
             return redirect(f'/blog/{blog.id}/')
         return render(request, 'form.html', {'form': form})
+
+
+class ShowDetailPost(View):
+    def get(self, request, id):
+        post = Post.objects.get(pk=id)
+        return render(request, 'post_detail_view.html', {'post':post})

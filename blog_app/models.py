@@ -8,12 +8,13 @@ class Blog(models.Model):
     name = models.CharField(max_length=30)
     topic = models.CharField(max_length=30)
     creation_date = models.DateTimeField(auto_now_add=True)
-    #post_set
+
+    # post_set
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("show_detail_blog", args=(self.id, ))
+        return reverse("show_detail_blog", kwargs={'id': self.id})
 
 
 class Post(models.Model):
@@ -25,4 +26,4 @@ class Post(models.Model):
         return f"{self.text[:20]} {self.creation_date}"
 
     def get_absolute_url(self):
-        return ""
+        return reverse("show_detail_post", kwargs={'id': self.id})
