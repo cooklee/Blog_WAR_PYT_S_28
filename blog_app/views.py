@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -22,7 +23,7 @@ class IndexView2(View):
         return render(request, 'cosnowego.html')
 
 
-class AddBlog(View):
+class AddBlog(LoginRequiredMixin, View):
 
     def get(self, request):
         return render(request, 'manual_form.html')

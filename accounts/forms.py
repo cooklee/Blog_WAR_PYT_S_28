@@ -23,3 +23,13 @@ class CreateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username']
+
+
+class UserPermUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['user_permissions']
+        widgets = {
+            'user_permissions':forms.CheckboxSelectMultiple
+        }
