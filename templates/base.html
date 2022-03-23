@@ -18,8 +18,10 @@
     <a href="{% url 'show_blog' %}">Blogi</a>
     <a href="{% url 'add_post' %}">Dodaj Post</a>
     <a href="{% url 'show_post' %}">Posty</a>
-      <a href="{% url 'add_comment' %}">Dodaj Komentarz</a>
-     <a href="{% url 'gen_post_create_view' %}">Dodaj post generycznie</a>
+    <a href="{% url 'add_comment' %}">Dodaj Komentarz</a>
+    <a href="{% url 'gen_post_create_view' %}">Dodaj post generycznie</a>
+    <a href="{% url 'login' %}"> login</a>
+    <a href="{% url 'register' %}"> register</a>
 </div>
 <p>
     {% block sikorka %}
@@ -28,5 +30,6 @@
 </p>
 
 <p><img src="{% static 'pobrane.jfif' %}"> {{ date }}</p>
+{{ user }}
 </body>
 </html>
