@@ -9,11 +9,14 @@
     <div style="border: solid; border-width: 1px;">
         {{ post.text }}
         <h5>{{ post.creation_date }}</h5>
+        {% if post.img %}
+            <img src="{{ post.img.url }}">
+        {% endif %}
     </div>
     </p>
     {% endfor %}
     </div>
-     <form method="post">
+     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit">

@@ -72,7 +72,7 @@ class ShowDetailBlog(View):
 
     def post(self, request, id):
         blog = Blog.objects.get(pk=id)
-        form = AddPostModelForm(request.POST)
+        form = AddPostModelForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.blog = blog

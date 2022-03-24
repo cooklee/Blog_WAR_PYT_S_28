@@ -24,6 +24,7 @@ class Post(models.Model):
     title = models.TextField(default="")
     creation_date = models.DateTimeField(auto_now_add=True)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    img = models.ImageField(null=True)
 
     def __str__(self):
         return f"{self.text[:20]} {self.creation_date}"
