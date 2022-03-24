@@ -31,7 +31,7 @@ class AddBlog(LoginRequiredMixin, View):
     def post(self, request):
         name = request.POST['name']
         topic = request.POST['topic']
-        Blog.objects.create(name=name, topic=topic)
+        Blog.objects.create(name=name, topic=topic, author=request.user)
         return redirect('add_blog')
 
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block sikorka %}
     <div>
-    tresc bloga {{ blog }}
+    tresc bloga {{ blog }} {{ blog.author.username }}
 
 
     {% for post in blog.post_set.all %}
